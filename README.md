@@ -1,6 +1,6 @@
 # 🏦 Loan Approval Automation
 
-An automated loan approval workflow built using **n8n**, **Google Sheets**, and intelligent decision-making logic to streamline the loan evaluation process. This project reduces manual effort, speeds up approvals, and provides instant notifications for approval, rejection, and spending alerts.
+An automated loan approval workflow built using **n8n**, **Google Sheets**, and intelligent decision-making logic to streamline the loan evaluation process. This project reduces manual effort, speeds up approvals, and provides instant notifications for approval, rejection, and pending alerts.
 
 ---
 
@@ -10,7 +10,7 @@ The Loan Approval Automation system automatically processes loan applications st
 
 - ✅ Approves eligible loan applications
 - ❌ Rejects ineligible applications
-- ⚠️ Generates spending alerts for risk monitoring
+- ⚠️ Generates pending alerts for risk monitoring
 - 📧 Sends automated notifications to stakeholders
 
 The workflow is implemented using **n8n**, enabling seamless integration between data sources and notification services.
@@ -24,7 +24,7 @@ The workflow is implemented using **n8n**, enabling seamless integration between
 - Rule-based approval and rejection logic
 - Real-time approval notifications
 - Automated rejection alerts
-- Spending/risk monitoring alerts
+- pending/risk monitoring alerts
 - No manual intervention required
 - Easy to customize approval criteria
 
@@ -65,7 +65,7 @@ Based on predefined rules:
 
 - **Approved** → Approval notification generated
 - **Rejected** → Rejection notification generated
-- **Risk Detected** → Spending alert generated
+- **Risk Detected** → Pending alert generated
 
 ### Step 5: Notification Delivery
 Relevant alerts are automatically sent to stakeholders.
@@ -86,8 +86,8 @@ Relevant alerts are automatically sent to stakeholders.
 ### Loan Rejection Alert
 ![Rejection Alert](assetrejection-alert.pnj.png)
 
-### pending Alert
-![pending Alert](asstspending-alert.pnj.png)
+### Pending Alert
+![Pending Alert](asstspending-alert.pnj.png)
 
 ---
 

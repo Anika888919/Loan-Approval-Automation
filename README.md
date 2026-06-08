@@ -78,7 +78,7 @@ Relevant alerts are automatically sent to stakeholders.
 ![n8n Workflow](assetn8n-workflow.ow.pnj.png)
 
 ### Google Sheets Integration
-![Google Sheets](google-sheets.png)
+![Google Sheets](assetsgoogle-%20Sheets.pnj.png)
 
 ### Loan Approval Alert
 ![Approval Alert](assetapproval-alert.pnj.png)

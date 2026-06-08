@@ -1,107 +1,129 @@
-# 🚀 Loan Approval Automation using n8n & AI
+# 🏦 Loan Approval Automation
+
+An automated loan approval workflow built using **n8n**, **Google Sheets**, and intelligent decision-making logic to streamline the loan evaluation process. This project reduces manual effort, speeds up approvals, and provides instant notifications for approval, rejection, and spending alerts.
+
+---
 
 ## 📌 Project Overview
 
-This project automates the loan approval workflow using **n8n**, **Google Sheets**, and **AI-powered decision-making**. The system processes loan applications, evaluates asset information, and automatically updates approval status while sending alerts for different stages of the workflow.
+The Loan Approval Automation system automatically processes loan applications stored in Google Sheets and evaluates applicants based on predefined eligibility criteria. Depending on the assessment, the system:
 
-The goal is to reduce manual effort, improve decision-making speed, and streamline the loan approval process in real time.
+- ✅ Approves eligible loan applications
+- ❌ Rejects ineligible applications
+- ⚠️ Generates spending alerts for risk monitoring
+- 📧 Sends automated notifications to stakeholders
 
----
-
-## 🎯 Features
-
-- ✅ Automated Loan Request Processing
-- ✅ Asset Verification Workflow
-- ✅ AI-Based Approval Decision Logic
-- ✅ Google Sheets Integration
-- ✅ Real-Time Status Updates
-- ✅ Approval Alerts & Notifications
-- ✅ Pending Asset Alerts
-- ✅ Missing Information Detection
-- ✅ End-to-End Workflow Automation using n8n
+The workflow is implemented using **n8n**, enabling seamless integration between data sources and notification services.
 
 ---
 
-## 🛠️ Technology Stack
+## 🚀 Features
+
+- Automated loan application processing
+- Google Sheets integration for data storage
+- Rule-based approval and rejection logic
+- Real-time approval notifications
+- Automated rejection alerts
+- Spending/risk monitoring alerts
+- No manual intervention required
+- Easy to customize approval criteria
+
+---
+
+## 🛠️ Tech Stack
 
 | Technology | Purpose |
 |------------|----------|
 | n8n | Workflow Automation |
-| Google Sheets | Data Storage & Tracking |
-| AI Logic | Loan Evaluation |
-| Webhooks | Trigger Workflow |
-| Notification System | Alerts & Updates |
+| Google Sheets | Data Storage & Application Tracking |
+| Email/Notification Service | Alert Generation |
+| Business Rules Engine | Loan Decision Logic |
+
+---
+
+## 📂 Project Structure
 
 ---
 
 ## 🔄 Workflow Process
 
-1. Loan application is submitted.
-2. Application data is stored in Google Sheets.
-3. Asset details are verified.
-4. AI evaluates the application based on predefined rules.
-5. Decision is generated:
-   - Approved
-   - Pending Asset Verification
-   - Additional Information Required
-6. Status is updated automatically.
-7. Alerts are sent to relevant stakeholders.
+### Step 1: Application Submission
+Loan applicant details are entered into Google Sheets.
 
----
+### Step 2: Data Retrieval
+n8n automatically fetches new loan applications.
 
-## 📂 Repository Structure
+### Step 3: Eligibility Check
+The workflow evaluates:
+- Applicant income
+- Credit score
+- Existing liabilities
+- Loan amount requested
+
+### Step 4: Decision Making
+Based on predefined rules:
+
+- **Approved** → Approval notification generated
+- **Rejected** → Rejection notification generated
+- **Risk Detected** → Spending alert generated
+
+### Step 5: Notification Delivery
+Relevant alerts are automatically sent to stakeholders.
 
 ---
 
 ## 📸 Workflow Screenshots
 
 ### n8n Workflow
-![n8n Workflow](assetn8n-workflow.ow.pnj.png)
+![n8n Workflow](assetn8n-workflow.png)
 
-### Google Sheet Database
-![Google Sheet](assetsgoogle-Sheets.pnj.png)
+### Google Sheets Integration
+![Google Sheets](assetsgoogle-Sheets.png)
 
-### Approval Alert
-![Approval Alert](assetapproval-alert.pnj.png)
+### Loan Approval Alert
+![Approval Alert](assetapproval-alert.png)
 
-### Pending Asset Alert
-![Pending Alert](assetpending-alert.pnj.png)
+### Loan Rejection Alert
+![Rejection Alert](assetrejection-alert.png)
 
-### Additional Information Required
-![Information Required](assetrejection-alert.png.png)
+### Spending Alert
+![Spending Alert](asstspending-alert.png)
 
 ---
 
-## 💡 Business Benefits
+## 🎯 Business Benefits
 
 - Faster loan processing
-- Reduced manual intervention
-- Improved operational efficiency
-- Real-time monitoring
+- Reduced operational costs
 - Consistent decision-making
-- Scalable workflow automation
+- Improved customer experience
+- Enhanced risk monitoring
+- Reduced manual errors
 
 ---
 
-## 🚀 Future Enhancements
+## 🔧 Future Enhancements
 
-- Credit Score Integration
-- Banking API Integration
-- Fraud Detection Module
-- Customer Dashboard
-- Email & WhatsApp Notifications
-- Machine Learning Based Risk Assessment
-
----
-
-## 👤 Author
-
-**Anika Bhatia**
-
-GitHub: https://github.com/Anika888919
+- AI-based credit risk scoring
+- Integration with banking APIs
+- Machine Learning approval models
+- Dashboard for monitoring applications
+- SMS and WhatsApp notifications
+- Fraud detection module
 
 ---
 
-## 📜 License
+## 👨‍💻 Author
 
-This project is created for educational and demonstration purposes.
+**Anika888919**
+
+Developed as an automation solution for streamlining loan approval and monitoring processes using n8n and Google Sheets.
+
+---
+
+## 📄 License
+
+This project is available for educational and demonstration purposes.
+```
+
+This README is professional and suitable for a GitHub project submission, internship portfolio, or academic project.

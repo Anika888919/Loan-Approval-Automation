@@ -75,7 +75,7 @@ Relevant alerts are automatically sent to stakeholders.
 ## 📸 Workflow Screenshots
 
 ### n8n Workflow
-![n8n Workflow](assetn8n-workflow.pnj.png)
+![n8n Workflow](assetn8n-workflow.ow.pnj.png)
 
 ### Google Sheets Integration
 ![Google Sheets](assetsgoogle-Sheets.pnj.png)

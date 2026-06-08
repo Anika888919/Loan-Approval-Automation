@@ -59,13 +59,13 @@ The goal is to reduce manual effort, improve decision-making speed, and streamli
 ![n8n Workflow](assetsn8n-workflow.png.png)
 
 ### Google Sheet Database
-![Google Sheet](assetsgoogle-sheet.png.png)
+![Google Sheet](assetsgoogle-Sheet.png.png)
 
 ### Approval Alert
 ![Approval Alert](assetapproval-alert.png.png)
 
 ### Pending Asset Alert
-![Pending Alert](assetpendingalert.png.png)
+![Pending Alert](assetpending-alert.png.png)
 
 ### Additional Information Required
 ![Information Required](assetrequest-required.png.png)

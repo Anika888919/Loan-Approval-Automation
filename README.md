@@ -75,19 +75,19 @@ Relevant alerts are automatically sent to stakeholders.
 ## 📸 Workflow Screenshots
 
 ### n8n Workflow
-![n8n Workflow](assetn8n-workflow.png)
+![n8n Workflow](assetn8n-workflow.pnj.png)
 
 ### Google Sheets Integration
-![Google Sheets](assetsgoogle-Sheets.png)
+![Google Sheets](assetsgoogle-Sheets.pnj.png)
 
 ### Loan Approval Alert
-![Approval Alert](assetapproval-alert.png)
+![Approval Alert](assetapproval-alert.pnj.png)
 
 ### Loan Rejection Alert
-![Rejection Alert](assetrejection-alert.png)
+![Rejection Alert](assetrejection-alert.pnj.png)
 
 ### Spending Alert
-![Spending Alert](asstspending-alert.png)
+![Spending Alert](asstspending-alert.pnj.png)
 
 ---
 

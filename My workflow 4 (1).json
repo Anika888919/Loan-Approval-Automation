@@ -1,0 +1,811 @@
+{
+  "name": "My workflow 4",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "1e6f8015-ab36-4fce-966a-86a185751f39",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "18kliYJdYUvAF4v5jTUNmV56vYFN0Q1YBBRoAkuXS_-0",
+          "mode": "list",
+          "cachedResultName": "Loan Approval ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18kliYJdYUvAF4v5jTUNmV56vYFN0Q1YBBRoAkuXS_-0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 541153517,
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18kliYJdYUvAF4v5jTUNmV56vYFN0Q1YBBRoAkuXS_-0/edit#gid=541153517"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "280082a6-8642-4761-abe9-016af3769e54",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "G4L0RQbkLLF8Uv4u",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "63aabfcd-2ed0-42dc-a5b8-9c9e4417342a",
+              "name": "EMI_Burden_Ratio",
+              "value": "={{ $json.Existing_EMI / $json.Monthly_Salary * 100 }}",
+              "type": "number"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "388a0e6d-a085-45b6-ad6e-4504b7c3e974",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "f11452e3-3cd9-408e-9ce9-e7524cc49814",
+              "leftValue": "={{ $json.Credit_Score }}",
+              "rightValue": 650,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        624,
+        0
+      ],
+      "id": "64e54046-6e75-4b2a-8b12-c9610479a345",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "sendTo": "bhatiaanika0@gmail.com",
+        "subject": "Reject Loan",
+        "emailType": "text",
+        "message": "Credit score is not enough to pass the loan.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        832,
+        -96
+      ],
+      "id": "719779a0-b4a2-4fd8-82ef-9a372c9d21ff",
+      "name": "Send a message",
+      "webhookId": "f699e565-472d-444b-a37e-8f90c798954a",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "8zExym6MwZOIwNt1",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "18kliYJdYUvAF4v5jTUNmV56vYFN0Q1YBBRoAkuXS_-0",
+          "mode": "list",
+          "cachedResultName": "Loan Approval ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18kliYJdYUvAF4v5jTUNmV56vYFN0Q1YBBRoAkuXS_-0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 541153517,
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18kliYJdYUvAF4v5jTUNmV56vYFN0Q1YBBRoAkuXS_-0/edit#gid=541153517"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Loan_ID": "={{ $('If').item.json.Loan_ID }}",
+            "EMI_Burden_Ratio": "={{ $('If').item.json.EMI_Burden_Ratio }}",
+            "Risk_Level": "High",
+            "Loan_Status": "Rejected"
+          },
+          "matchingColumns": [
+            "Loan_ID"
+          ],
+          "schema": [
+            {
+              "id": "Loan_ID",
+              "displayName": "Loan_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Applicant_Name",
+              "displayName": "Applicant_Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Age",
+              "displayName": "Age",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Monthly_Salary",
+              "displayName": "Monthly_Salary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Credit_Score",
+              "displayName": "Credit_Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Existing_EMI",
+              "displayName": "Existing_EMI",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Loan_Amount",
+              "displayName": "Loan_Amount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "EMI_Burden_Ratio",
+              "displayName": "EMI_Burden_Ratio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Risk_Level",
+              "displayName": "Risk_Level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Loan_Status",
+              "displayName": "Loan_Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1040,
+        -96
+      ],
+      "id": "4bba2378-e5e0-4aa6-b83a-3375b35ea770",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "G4L0RQbkLLF8Uv4u",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "7ecf812f-cf15-4695-81e6-5ebfce4d9fa6",
+              "leftValue": "={{ $json.Credit_Score }}",
+              "rightValue": 750,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            },
+            {
+              "id": "1630f813-3be7-40d5-92f4-38f12105be85",
+              "leftValue": "={{ $json.EMI_Burden_Ratio }}",
+              "rightValue": 30,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        832,
+        96
+      ],
+      "id": "aa7f34c9-2ee6-4e0d-971f-a232ef303c0f",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "sendTo": "bhatiaanika0@gmail.com",
+        "subject": "Approved Loan",
+        "emailType": "text",
+        "message": "Congratulations your loan is approved.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1088,
+        80
+      ],
+      "id": "d9d175fd-4eb9-4c40-8456-9dcae4b20a6b",
+      "name": "Send a message1",
+      "webhookId": "382a4831-9d73-4762-8982-555650b0ca92",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "8zExym6MwZOIwNt1",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "18kliYJdYUvAF4v5jTUNmV56vYFN0Q1YBBRoAkuXS_-0",
+          "mode": "list",
+          "cachedResultName": "Loan Approval ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18kliYJdYUvAF4v5jTUNmV56vYFN0Q1YBBRoAkuXS_-0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 541153517,
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18kliYJdYUvAF4v5jTUNmV56vYFN0Q1YBBRoAkuXS_-0/edit#gid=541153517"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Loan_ID": "={{ $('If1').item.json.Loan_ID }}",
+            "EMI_Burden_Ratio": "={{ $('If1').item.json.EMI_Burden_Ratio }}",
+            "Risk_Level": "Low",
+            "Loan_Status": "Approved"
+          },
+          "matchingColumns": [
+            "Loan_ID"
+          ],
+          "schema": [
+            {
+              "id": "Loan_ID",
+              "displayName": "Loan_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Applicant_Name",
+              "displayName": "Applicant_Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Age",
+              "displayName": "Age",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Monthly_Salary",
+              "displayName": "Monthly_Salary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Credit_Score",
+              "displayName": "Credit_Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Existing_EMI",
+              "displayName": "Existing_EMI",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Loan_Amount",
+              "displayName": "Loan_Amount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "EMI_Burden_Ratio",
+              "displayName": "EMI_Burden_Ratio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Risk_Level",
+              "displayName": "Risk_Level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Loan_Status",
+              "displayName": "Loan_Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1312,
+        80
+      ],
+      "id": "83b96788-4abf-45a2-95dc-8eecde83b361",
+      "name": "Update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "G4L0RQbkLLF8Uv4u",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "bhatiaanika0@gmail.com",
+        "subject": "Pending",
+        "emailType": "text",
+        "message": "Your loan status is currently in process.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1024,
+        240
+      ],
+      "id": "0787fad6-dcb5-4e3c-87f9-07ecc29c5b70",
+      "name": "Send a message2",
+      "webhookId": "69a2bf13-f3ae-4884-a02b-6ea2f8815280",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "8zExym6MwZOIwNt1",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "18kliYJdYUvAF4v5jTUNmV56vYFN0Q1YBBRoAkuXS_-0",
+          "mode": "list",
+          "cachedResultName": "Loan Approval ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18kliYJdYUvAF4v5jTUNmV56vYFN0Q1YBBRoAkuXS_-0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 541153517,
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18kliYJdYUvAF4v5jTUNmV56vYFN0Q1YBBRoAkuXS_-0/edit#gid=541153517"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Loan_ID": "={{ $('If1').item.json.Loan_ID }}",
+            "EMI_Burden_Ratio": "={{ $('If1').item.json.EMI_Burden_Ratio }}",
+            "Risk_Level": "Medium",
+            "Loan_Status": "Pending"
+          },
+          "matchingColumns": [
+            "Loan_ID"
+          ],
+          "schema": [
+            {
+              "id": "Loan_ID",
+              "displayName": "Loan_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Applicant_Name",
+              "displayName": "Applicant_Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Age",
+              "displayName": "Age",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Monthly_Salary",
+              "displayName": "Monthly_Salary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Credit_Score",
+              "displayName": "Credit_Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Existing_EMI",
+              "displayName": "Existing_EMI",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Loan_Amount",
+              "displayName": "Loan_Amount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "EMI_Burden_Ratio",
+              "displayName": "EMI_Burden_Ratio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Risk_Level",
+              "displayName": "Risk_Level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Loan_Status",
+              "displayName": "Loan_Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1280,
+        240
+      ],
+      "id": "6d345cac-449e-4e9f-8cc4-22795ba999cf",
+      "name": "Update row in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "G4L0RQbkLLF8Uv4u",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message1": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message2": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "412e332a-3a1d-4e08-b419-bd486906c170",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d9070572cf30f1342d4ff898239890a08a4d0465a428bd8fb6149e3334c09b15"
+  },
+  "id": "nx7Y5pg4COMJKJiP",
+  "tags": []
+}
